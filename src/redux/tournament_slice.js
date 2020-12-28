@@ -30,28 +30,28 @@ export const tournamentSlice = createSlice({
 export const { fetchAll, fetchById, errorCatch, addTournament, setEditTournament} = tournamentSlice.actions;
 
 export const tournamentIndexFetch = () => dispatch => {
-  fetch('http://localhost:3000/tournaments')
+  fetch('http://localhost:8000/tournaments')
     .then(resp=>resp.json())
     .then(data => dispatch(fetchAll(data)))
     .catch(err => dispatch(errorCatch(err)))
 };
 
 export const addTournamentFetch = (newTournament) => dispatch => {
-  console.log(newTournament)
   const configObj = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Accepts': 'application/json'
+      'Accepts' : 'application/json'
     },
     body: JSON.stringify(newTournament)
   }
-  fetch('http://localhost:3000/tournament', configObj)
+  fetch('http://localhost:8000/tournament', configObj)
     .then(resp => resp.json())
     .then(data => {
       console.log(data)
       dispatch(addTournament(data))
     })
+    .catch(err => console.log(err))
 }
 
 export const selectErrors = state => state.tournament.errors;
