@@ -19,7 +19,7 @@ function Login(){
           value={password}
           onChange={(e)=>setPassword(e.target.value)}
         />
-        <input type="submit" value="Login" />
+        <input type="submit" readOnly value="Login" />
       </form>
     </div>
   )

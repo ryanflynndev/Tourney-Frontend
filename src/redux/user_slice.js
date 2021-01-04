@@ -32,7 +32,10 @@ export const signUpUser = (user) => dispatch => {
   }
   fetch('http://localhost:8000/signup', configObj)
     .then(resp=>resp.json())
-    .then(data => dispatch(loginUser(data.user)))
+    .then(data => {
+      console.log(data)
+      dispatch(loginUser(data.user))
+    })
     .catch(err => dispatch(addError(err)))
 }
 

@@ -51,7 +51,7 @@ function SignUp(){
           value={repeatPassword}
           onChange={(e)=>setRepeatPassword(e.target.value)}
         />
-        <input type="submit" value="Sign Up" />
+        <input type="submit" readOnly value="Sign Up" />
       </form>
     </div>
   )
