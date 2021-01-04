@@ -1,4 +1,5 @@
 import React from 'react'
+import Search from '../Components/Search'
 import './navbarcss.css'
 
 function NavBar(){
@@ -11,7 +12,7 @@ function NavBar(){
         <p>App Name</p>
       </div>
       <div id="nav-center">
-        <input placeholder="Search"/>
+        <Search />
       </div>
       <div id="nav-right">
         <select value="Drop down of Options">

@@ -5,8 +5,7 @@ export const tournamentSlice = createSlice({
   initialState: {
     tournaments: [],
     tournament: {},
-    // editTournament: {name: '', category: '', startDate: new Date(), endDate: new Date()},
-    errors: [],
+    tournamentErrors: [],
   },
   reducers: {
     fetchAll: (state, action )=> {
@@ -16,14 +15,11 @@ export const tournamentSlice = createSlice({
       state.post = action.payload.tournament
     },
     errorCatch: (state, action) => {
-      state.errors.push(action.payload)
+      state.tournamentErrors.push(action.payload)
     },
     addTournament: (state, action) => {
       state.tournaments.push(action.payload.tournament);
-    }, 
-    // setEditTournament: (state, action) => {
-    //   state.editTournament = action.payload
-    // }
+    }
   },
 });
 
@@ -54,7 +50,7 @@ export const addTournamentFetch = (newTournament) => dispatch => {
     .catch(err => console.log(err))
 }
 
-export const selectErrors = state => state.tournament.errors;
+export const selectTournamentErrors = state => state.tournament.tournamentErrors;
 export const selectTournaments = state => state.tournament.tournaments;
 export const selectTournament = state => state.tournament.tournament;
 // export const selectEditTournament = state => state.tournament.editTournament;
