@@ -1,0 +1,16 @@
+#nav-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#nav-left{
+  display: flex;
+  align-items: center;
+
+}
+#nav-right{
+  display: flex;
+  align-items: center;
+  
+}

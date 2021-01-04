@@ -1,9 +1,8 @@
-import TournamentForm from './Forms/TournamentForm'
-import './App.css';
+import Home from './Containers/Home';
 
 function App() {
   return (
-    <TournamentForm />
+    <Home />
   );
 }
 
