@@ -26,7 +26,7 @@ function Login(){
           />
         </div>
 
-        <input type="submit" readOnly value="Login" />
+        <input className="ui button" type="submit" readOnly value="Login" />
       </form>
     </div>
   )

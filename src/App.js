@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import Home from './Containers/Home';
 import Landing from './Containers/Landing'
+import {withRouter, Route} from 'react-router'
 import { 
   selectCurrentUser,
   
@@ -12,9 +13,10 @@ function App() {
 
   return (
     <>
-      {currentUser.username ? <Home /> : <Landing />}
+      <Route path="/home" exact component={Home} />
+      <Route path="/" component={Landing}/>
     </>
   );
 }
 
-export default App;
+export default withRouter(App);
