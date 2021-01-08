@@ -8,7 +8,7 @@ export const userSlice = createSlice({
   },
   reducers: {
     addError: (state, action) => {
-      state.userErrors.push(action.payload)
+      state.userErrors = action.payload
     },
     setCurrentUser: (state, action) => {
       state.currentUser = action.payload
@@ -32,13 +32,18 @@ export const signUpUser = (user) => async dispatch => {
   }
   try {
     const resp = await fetch('http://localhost:8000/signup', configObj)
-    if (resp.status === 422) throw new Error('Validation failed')
-    if (resp.status !== 200 || resp.status !== 201) throw new Error('Creating new User failed')
     const data = await resp.json();
+    if (resp.status === 422){
+      dispatch(addError(data.data))
+      throw new Error(data.message)
+    }
+    if (resp.status !== 200 || resp.status !== 201){
+      console.log('Error')
+      throw new Error('Creating new user failed.')
+    } 
     dispatch(setCurrentUser(data.user))
   } catch (err){
     console.log(err)
-    dispatch(addError(err))
   } 
 }
 
@@ -54,10 +59,17 @@ export const loginUser = (user) => async dispatch => {
   try {
     const resp = await fetch('http://localhost:8000/login', configObj);
     const data = await resp.json();
-    //ERROR HANDLING NEEDED
+    if (resp.status === 404 || resp.status === 401){
+      dispatch(addError(data.data))
+      throw new Error(data.message)
+    } 
+    if (resp.status !== 200 || resp.status !== 201){
+      console.log('Error')
+      throw new Error('Login failed')
+    }
     dispatch(setCurrentUser(data.user))
   } catch (err){
-    dispatch(addError(err));
+    console.log(err)
   }
 }
 

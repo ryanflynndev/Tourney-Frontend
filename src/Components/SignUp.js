@@ -26,9 +26,8 @@ function SignUp(props){
   }
 
   const renderErrors = () => {
-    console.log(errors)
     return errors.map(error => {
-      return <p>{error.message}</p>
+      return <p>{error.msg}</p>
     })
   }
 
