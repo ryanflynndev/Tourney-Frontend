@@ -9,7 +9,7 @@ function Landing(){
   return(
     <div className="login-form">
       {!signup ? <Login /> : null}
-      <button class="ui button" hidden={signup} onClick={()=>setSignUp(true)}>Click To Sign Up</button>
+      <button className="ui button" hidden={signup} onClick={()=>setSignUp(true)}>Click To Sign Up</button>
       {signup ? <SignUp /> : null}
     </div>
   )

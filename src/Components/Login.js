@@ -1,19 +1,29 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { loginUser } from '../redux/user_slice'
 
 function Login(){
-  const [username, setUsername] = useState('')
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  const submitHandler = (e) => {
+    e.preventDefault()
+    dispatch(loginUser({email: email, password: password}))
+    setEmail('')
+    setPassword('')
+  }
 
   return(
     <div>
-      <form className="ui form" onSubmit={''}>
+      <form className="ui form" onSubmit={(e) => submitHandler(e)}>
         <div className="field">
-          <label>Username:</label>
+          <label>Email:</label>
           <input 
             type="text"
-            placeholder="Username..."
-            value={username}
-            onChange={(e)=>setUsername(e.target.value)}
+            placeholder="Email..."
+            value={email}
+            onChange={(e)=>setEmail(e.target.value)}
           />
         </div>
         <div className="field">

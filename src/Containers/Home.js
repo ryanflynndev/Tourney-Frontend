@@ -14,7 +14,6 @@ import {
 function Home(){
 
   const currentUser = useSelector(selectCurrentUser)
-  console.log(currentUser)
 
   return(
       <div>
