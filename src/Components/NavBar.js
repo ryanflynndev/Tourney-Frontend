@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TemporaryDrawer() {
+function TemporaryDrawer(props) {
   const classes = useStyles();
   const [state, setState] = React.useState({
     top: false,
@@ -65,11 +65,18 @@ export default function TemporaryDrawer() {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
+      {/* {console.log(props)} */}
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+        {['Create'].map((text) => (
           <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
+            {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
+            <ListItemText primary={text} onClick={() => props.history.push('/home/tournamentform')}/>
+          </ListItem>
+        ))}
+        {['View Tournaments'].map((text) => (
+          <ListItem button key={text}>
+            {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
+            <ListItemText primary={text} onClick={() => props.history.push('/home/tournaments')}/>
           </ListItem>
         ))}
       </List>
@@ -101,13 +108,14 @@ export default function TemporaryDrawer() {
         <Typography variant="h6" className={classes.title}>
           Tournament
         </Typography>
-        <Button color="inherit">Login</Button>
+        <Button color="inherit">Create</Button>
       </Toolbar>
     </AppBar>
   </div>
   );
-}
+};
 
+export default withRouter(TemporaryDrawer);
 
 // function NavBar(props){
 

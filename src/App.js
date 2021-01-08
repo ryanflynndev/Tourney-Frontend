@@ -13,7 +13,7 @@ function App() {
 
   return (
     <>
-      <Route path="/home" exact component={Home} />
+      <Route path="/home" component={Home} />
       <Route path="/" exact component={Landing}/>
     </>
   );

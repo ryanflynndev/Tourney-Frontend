@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import NavBar from '../Components/NavBar'
 import TournamentForm from '../Forms/TournamentForm'
 import {
@@ -10,16 +11,18 @@ import {
 import { 
   selectCurrentUser,
  } from '../redux/user_slice'
+import TournamentCountainer from './TournamentContainer'
 
-function Home(){
+function Home(props){
 
   const currentUser = useSelector(selectCurrentUser)
 
   return(
       <div>
         <NavBar />
-        <Route path="/tournament-form" exact component={TournamentForm} />
+        <Route path="/home/tournamentform" component={TournamentForm} />
         {/* TOURNAMENT CONTAINER */}
+        <Route path="/home/tournaments" component={TournamentCountainer}/>
         <h1>HOME PAGE</h1>
       </div>
 
@@ -27,4 +30,4 @@ function Home(){
   )
 }
 
-export default Home;
+export default withRouter(Home);
