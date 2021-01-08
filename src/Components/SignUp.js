@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import {withRouter} from 'react-router'
 import { signUpUser } from '../redux/user_slice'
 
-function SignUp(){
+function SignUp(props){
   const dispatch = useDispatch();
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
@@ -22,7 +23,11 @@ function SignUp(){
     setEmail('')
     setPassword('')
     setRepeatPassword('')
+    props.history.push('/home')
+
   }
+
+  console.log(props)
 
   return(
     <div>
@@ -57,4 +62,4 @@ function SignUp(){
   )
 }
 
-export default SignUp;
+export default withRouter(SignUp);
