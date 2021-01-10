@@ -56,7 +56,7 @@ export const signUpUser = (user, history) => async dispatch => {
     await dispatch(setCurrentUser(data.user))
     history.push('/home')
   } catch (err){
-    console.log(err)
+    dispatch(addError(err));
   } 
 }
 
@@ -73,7 +73,8 @@ export const loginUser = (user, history) => async dispatch => {
     const resp = await fetch('/login', configObj);
     const data = await resp.json();
     if (resp.status === 404 || resp.status === 401){
-      dispatch(addError(data.data))
+      const err = [{msg: data.message}]
+      dispatch(addError(err))
       throw new Error(data.message)
     } 
     if (resp.status !== 200 && resp.status !== 201){
@@ -84,7 +85,7 @@ export const loginUser = (user, history) => async dispatch => {
     await dispatch(setCurrentUser(data.user))
     history.push('/home')
   } catch (err){
-    console.log(err)
+    dispatch(addError(err));
   }
 }
 

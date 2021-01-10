@@ -24,15 +24,9 @@ function SignUp(props){
     setPassword('')
   }
 
-  const renderErrors = () => {
-    return errors.map(error => {
-      return <p>{error.msg}</p>
-    })
-  }
 
   return(
     <>
-      {errors.length > 0 ? renderErrors() : null}
       <form onSubmit={(e)=>signupHandler(e)} className="ui form" id="signup-form" >
         <div className="field">
           <label>Username:</label>
