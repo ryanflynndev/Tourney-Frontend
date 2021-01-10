@@ -31,30 +31,39 @@ function SignUp(props){
   }
 
   return(
-    <div>
+    <>
       {errors.length > 0 ? renderErrors() : null}
-      <form onSubmit={(e)=>signupHandler(e)}>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e)=>setUsername(e.target.value)}
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e)=>setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e)=>setPassword(e.target.value)}
-        />
-        <input type="submit" readOnly value="Sign Up" />
+      <form onSubmit={(e)=>signupHandler(e)} className="ui form" id="signup-form" >
+        <div className="field">
+          <label>Username:</label>
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e)=>setUsername(e.target.value)}
+          />
+        </div>
+        <div className="field">
+          <label>Email:</label>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e)=>setEmail(e.target.value)}
+          />
+        </div>
+        <div className="field">
+          <label>Password:</label>
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e)=>setPassword(e.target.value)}
+          />
+        </div>
+        <input className="ui button" type="submit" readOnly value="Sign Up" />
       </form>
-    </div>
+    </>
   )
 }
 

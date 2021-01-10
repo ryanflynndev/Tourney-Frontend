@@ -3,6 +3,9 @@ import clsx from 'clsx';
 import Search from '../Components/Search'
 import '../css/navbarcss.css'
 import { withRouter } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { logoutUser } from '../redux/user_slice'
+
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
@@ -40,6 +43,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function TemporaryDrawer(props) {
+  const dispatch = useDispatch();
+
+  const logoutHandler = () => {
+    console.log('inside logout Handler')
+    dispatch(logoutUser(props.history))
+  }
+
   const classes = useStyles();
   const [state, setState] = React.useState({
     top: false,
@@ -67,10 +77,10 @@ function TemporaryDrawer(props) {
     >
       {/* {console.log(props)} */}
       <List>
-        {['Create'].map((text) => (
+        {['Logout'].map((text) => (
           <ListItem button key={text}>
             {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
-            <ListItemText primary={text} onClick={() => props.history.push('/home/tournamentform')}/>
+            <ListItemText primary={text} onClick={() => dispatch(logoutUser())}/>
           </ListItem>
         ))}
         {['View Tournaments'].map((text) => (
@@ -108,7 +118,7 @@ function TemporaryDrawer(props) {
         <Typography variant="h6" className={classes.title}>
           Tournament
         </Typography>
-        <Button color="inherit">Create</Button>
+        <Button color="inherit" onClick={logoutHandler} >logout</Button>
       </Toolbar>
     </AppBar>
   </div>

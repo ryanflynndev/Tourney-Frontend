@@ -88,4 +88,17 @@ export const loginUser = (user, history) => async dispatch => {
   }
 }
 
+export const logoutUser = (history) => async dispatch => {
+  try {
+    const resp = await fetch('/logout');
+    const data = await resp.json();
+    if (resp.status === 200){
+      await dispatch(setCurrentUser({}))
+    }
+    history.push('/')
+  } catch (error){
+    console.log(error)
+  }
+}
+
 export default userSlice.reducer;

@@ -18,19 +18,11 @@ function App(props) {
     }
   }, [currentUser])
 
-  const determineInitialLoad = () => {
-    console.log("determining")
-    if (currentUser._id){
-      props.history.push('/home')
-    } else {
-      props.history.push('/')
-    }
-  }
 
   return (
     <>
         <Route path="/home" component={Home} />
-        <Route path="/" exact component={Landing}/>
+        {currentUser._id ? null : <Landing />}
     </>
   );
 }

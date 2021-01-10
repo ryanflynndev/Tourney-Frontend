@@ -16,8 +16,8 @@ function Login(props){
   }
 
   return(
-    <div>
-      <form className="ui form" onSubmit={(e) => submitHandler(e)}>
+    <>
+      <form className="ui form" id="login-form" onSubmit={(e) => submitHandler(e)}>
         <div className="field">
           <label>Email:</label>
           <input 
@@ -39,7 +39,7 @@ function Login(props){
 
         <input className="ui button" type="submit" readOnly value="Login" />
       </form>
-    </div>
+    </>
   )
 }
 
