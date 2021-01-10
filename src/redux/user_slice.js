@@ -21,7 +21,18 @@ export const { addError, setCurrentUser } = userSlice.actions;
 export const selectCurrentUser = state => state.user.currentUser;
 export const selectUserErrors = state => state.user.userErrors;
 
-export const signUpUser = (user) => async dispatch => {
+export const grabUser = (history) => async dispatch => {
+  const resp = await fetch('/user')
+  const data = await resp.json()
+  if (resp.status === 201){
+    await dispatch(setCurrentUser(data.user))
+    history.push('/home')
+  } else {
+    history.push('/')
+  }
+}
+
+export const signUpUser = (user, history) => async dispatch => {
   const configObj = {
     method: 'POST',
     headers: {
@@ -31,23 +42,25 @@ export const signUpUser = (user) => async dispatch => {
     body: JSON.stringify(user)
   }
   try {
-    const resp = await fetch('http://localhost:8000/signup', configObj)
+    const resp = await fetch('/signup', configObj)
     const data = await resp.json();
     if (resp.status === 422){
       dispatch(addError(data.data))
       throw new Error(data.message)
     }
-    if (resp.status !== 200 || resp.status !== 201){
+    if (resp.status !== 200 && resp.status !== 201){
       console.log('Error')
       throw new Error('Creating new user failed.')
     } 
-    dispatch(setCurrentUser(data.user))
+    console.log(data.message)
+    await dispatch(setCurrentUser(data.user))
+    history.push('/home')
   } catch (err){
     console.log(err)
   } 
 }
 
-export const loginUser = (user) => async dispatch => {
+export const loginUser = (user, history) => async dispatch => {
   const configObj = {
     method: 'POST',
     headers: {
@@ -57,17 +70,19 @@ export const loginUser = (user) => async dispatch => {
     body: JSON.stringify(user)
   }
   try {
-    const resp = await fetch('http://localhost:8000/login', configObj);
+    const resp = await fetch('/login', configObj);
     const data = await resp.json();
     if (resp.status === 404 || resp.status === 401){
       dispatch(addError(data.data))
       throw new Error(data.message)
     } 
-    if (resp.status !== 200 || resp.status !== 201){
+    if (resp.status !== 200 && resp.status !== 201){
       console.log('Error')
       throw new Error('Login failed')
     }
-    dispatch(setCurrentUser(data.user))
+    console.log(data.message)
+    await dispatch(setCurrentUser(data.user))
+    history.push('/home')
   } catch (err){
     console.log(err)
   }

@@ -27,19 +27,24 @@ export const tournamentSlice = createSlice({
   },
 });
 
-export const { fetchActive, fetchInactive, fetchById, errorCatch, addTournament} = tournamentSlice.actions;
+export const { 
+  fetchActive, 
+  fetchInactive, 
+  fetchById, 
+  errorCatch, 
+  addTournament,
+} = tournamentSlice.actions;
 
 export const activeTournamentFetch = () => dispatch => {
-  fetch('http://localhost:8000/active-tournaments')
+  fetch('/active-tournaments')
     .then(resp=>resp.json())
     .then(data => dispatch(fetchActive(data)))
     .catch(err => dispatch(errorCatch(err)))
 };
 export const inactiveTournamentFetch = () => dispatch => {
-  fetch('http://localhost:8000/inactive-tournaments')
+  fetch('/inactive-tournaments')
     .then(resp=>resp.json())
     .then(data => {
-      console.log(data)
       dispatch(fetchInactive(data))
     })
     .catch(err => dispatch(errorCatch(err)))
@@ -54,7 +59,7 @@ export const addTournamentFetch = (newTournament) => dispatch => {
     },
     body: JSON.stringify(newTournament)
   }
-  fetch('http://localhost:8000/tournament', configObj)
+  fetch('/tournament', configObj)
     .then(resp => resp.json())
     .then(data => {
       console.log(data)
@@ -68,12 +73,10 @@ export const addUserToTournamentFetch = (user, tournament) => async dispatch => 
     method: 'PUT',
     headers: {
       'Content-type': 'application/json',
-      'Accepts': 'application/json',
-      // 'Authorization': 'Bearer ' + 
-    },
-    body: JSON.stringify(user)
+      'Accepts': 'application/json'
+    }
   }
-  const resp = await fetch(`http://localhost:8000/tournament/${tournament._id}/join`, configObj)
+  const resp = await fetch(`/tournament/${tournament._id}/join`, configObj)
   const data = await resp.json();
   console.log(data)
 }

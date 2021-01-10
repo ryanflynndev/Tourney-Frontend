@@ -18,11 +18,10 @@ function SignUp(props){
       email: email,
       password: password
     }
-    dispatch(signUpUser(signupUser))
+    dispatch(signUpUser(signupUser, props.history))
     setUsername('')
     setEmail('')
     setPassword('')
-    props.history.push('/home')
   }
 
   const renderErrors = () => {
