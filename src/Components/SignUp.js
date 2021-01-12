@@ -1,15 +1,13 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import {withRouter} from 'react-router'
-import { selectUserErrors, signUpUser } from '../redux/user_slice'
+import { signUpUser } from '../redux/user_slice'
 
 function SignUp(props){
   const dispatch = useDispatch();
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
-  const errors = useSelector(selectUserErrors)
 
   const signupHandler = (e) => {
     e.preventDefault();
