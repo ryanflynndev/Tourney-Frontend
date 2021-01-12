@@ -79,15 +79,18 @@ function TemporaryDrawer(props) {
           <ListItem button >
             <ListItemText primary="View Tournaments" onClick={() => props.history.push('/home/tournaments')}/>
           </ListItem>
+          <ListItem button >
+            <ListItemText primary="Create Tournament" onClick={() => props.history.push('/home/tournamentform')}/>
+          </ListItem>
       </List>
       <Divider />
-      <List>
+      {/* <List>
         {['All mail', 'Trash', 'Spam'].map((text, index) => (
           <ListItem button key={text}>
             <ListItemText primary={text} />
           </ListItem>
         ))}
-      </List>
+      </List> */}
     </div>
   );
 

@@ -26,7 +26,8 @@ export const grabUser = (history) => async dispatch => {
   const data = await resp.json()
   if (resp.status === 201){
     await dispatch(setCurrentUser(data.user))
-    history.push('/home')
+    console.log(history)
+    history.goForward()
   } else {
     history.push('/')
   }

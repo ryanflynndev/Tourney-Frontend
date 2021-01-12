@@ -11,7 +11,8 @@ import {
 import { 
   selectCurrentUser,
  } from '../redux/user_slice'
-import TournamentCountainer from './TournamentContainer'
+import TournamentContainer from './TournamentContainer'
+
 
 function Home(props){
 
@@ -22,8 +23,9 @@ function Home(props){
         <NavBar />
         <Route path="/home/tournamentform" component={TournamentForm} />
         {/* TOURNAMENT CONTAINER */}
-        <Route path="/home/tournaments" component={TournamentCountainer}/>
+        <Route path="/home/tournaments" component={TournamentContainer}/>
         <h1>HOME PAGE</h1>
+        
       </div>
 
 
