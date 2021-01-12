@@ -55,6 +55,13 @@ function SignUp(props){
         </div>
         <input className="ui button" type="submit" readOnly value="Sign Up" />
       </form>
+
+      <div id="signup-btn-wrapper">
+        <button 
+          className="ui button" 
+          onClick={()=>props.history.push('/login')}
+        >Back to Login</button>
+      </div>
     </>
   )
 }

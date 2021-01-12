@@ -21,15 +21,15 @@ export const { addError, setCurrentUser } = userSlice.actions;
 export const selectCurrentUser = state => state.user.currentUser;
 export const selectUserErrors = state => state.user.userErrors;
 
-export const grabUser = (history) => async dispatch => {
+export const grabUser = (props) => async dispatch => {
   const resp = await fetch('/user')
   const data = await resp.json()
   if (resp.status === 201){
+    console.log(data.user)
     await dispatch(setCurrentUser(data.user))
-    console.log(history)
-    history.goForward()
+    console.log(props)
   } else {
-    history.push('/')
+    props.history.push('/login')
   }
 }
 

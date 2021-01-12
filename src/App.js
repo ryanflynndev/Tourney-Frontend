@@ -14,15 +14,16 @@ function App(props) {
   
   useEffect(() => {
     if (!currentUser._id) {
-      dispatch(grabUser(props.history));
+      dispatch(grabUser(props));
     }
   }, [currentUser])
 
+  
 
   return (
     <>
         <Route path="/home" component={Home} />
-        {currentUser._id ? null : <Landing />}
+        <Route patch="/" component={Landing} />
     </>
   );
 }
