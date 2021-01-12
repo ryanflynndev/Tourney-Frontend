@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import clsx from 'clsx';
 import Search from '../Components/Search'
 import '../css/navbarcss.css'
@@ -14,8 +14,6 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -46,12 +44,11 @@ function TemporaryDrawer(props) {
   const dispatch = useDispatch();
 
   const logoutHandler = () => {
-    console.log('inside logout Handler')
     dispatch(logoutUser(props.history))
   }
 
   const classes = useStyles();
-  const [state, setState] = React.useState({
+  const [state, setState] = useState({
     top: false,
     left: false,
     bottom: false,
@@ -75,26 +72,18 @@ function TemporaryDrawer(props) {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      {/* {console.log(props)} */}
       <List>
-        {['Logout'].map((text) => (
-          <ListItem button key={text}>
-            {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
-            <ListItemText primary={text} onClick={() => dispatch(logoutUser())}/>
+          <ListItem button >
+            <ListItemText primary="Logout" onClick={() => dispatch(logoutUser())}/>
           </ListItem>
-        ))}
-        {['View Tournaments'].map((text) => (
-          <ListItem button key={text}>
-            {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
-            <ListItemText primary={text} onClick={() => props.history.push('/home/tournaments')}/>
+          <ListItem button >
+            <ListItemText primary="View Tournaments" onClick={() => props.history.push('/home/tournaments')}/>
           </ListItem>
-        ))}
       </List>
       <Divider />
       <List>
         {['All mail', 'Trash', 'Spam'].map((text, index) => (
           <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
         ))}
