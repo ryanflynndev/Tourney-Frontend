@@ -11,9 +11,7 @@ function UpcomingTournaments(){
         const sorted = upcomingTournaments.slice().sort((a,b) => b.startDate - a.startDate)
         return sorted.map(tourney => {
           return (
-            <div key={tourney._id}>
-              {tourney.name}
-            </div>
+            <TournamentCard key={tourney.id} tournament={tourney}/>
           )
         })
     }
