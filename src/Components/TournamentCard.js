@@ -19,8 +19,8 @@ const useStyles = makeStyles({
       fontSize: 14,
     },
     pos: {
-      marginBottom: 12,
-    },
+      marginTop: 20,
+    }
   });
 
 
@@ -30,9 +30,12 @@ function TournamentCard({tournament}){
 
     return(
         <div>
-            <Card className={classes.root}>
-                <CardContent>
+            <Card className={classes.root} variant="outlined">
+                <CardContent className={classes.pos}>
                     <Typography variant="h5" component="h2">{tournament.name}</Typography>
+                    <Typography variant="body2" component="p">
+                        Description: {tournament.description}
+                    </Typography>
                 </CardContent>
             </Card>
             {/* <h3>Name: {tournament.name}</h3>

@@ -20,7 +20,7 @@ function UpcomingTournaments(){
 
     return(
       <>
-        <div>Upcoming Tournaments</div>
+        {/* <div>Upcoming Tournaments</div> */}
         {upcomingTournaments.length > 0 ? renderUpcoming() : null}
       </>
     )

@@ -8,10 +8,19 @@ import {
 import UpcomingTournaments from './UpcomingTournaments';
 import CurrentTournaments from './CurrentTournaments'
 import PastTournaments from './PastTournaments'
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  divstyle: {
+    display: 'flex',
+    justifyContent: 'flex-start'
+  }
+})
+
 
 function TournamentContainer(){
   const dispatch = useDispatch();
-
+  const classes = useStyles();
 
   useEffect(()=> {
     dispatch(upcomingTournamentFetch())
@@ -20,13 +29,16 @@ function TournamentContainer(){
   }, [])
 
     return(
-    <div>
-        Tournament Container
-        <UpcomingTournaments />
-        <CurrentTournaments/>
-        <PastTournaments/>
-    </div>)
-
+    <>
+    Upcoming Tournaments:
+      <div className={classes.divstyle}>
+          <UpcomingTournaments />
+      </div>
+      <CurrentTournaments/>
+      <PastTournaments/>
+    </>
+    )
 }
 
 export default TournamentContainer;
+
