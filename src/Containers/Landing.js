@@ -1,29 +1,27 @@
-import React, { useState } from 'react'
-import { Route, withRouter } from 'react-router-dom'
+import React from 'react'
+import { Route } from 'react-router-dom'
 import {useSelector} from 'react-redux'
-import {
-  selectUserErrors
-} from '../redux/user_slice'
+import {selectUserErrors} from '../redux/user_slice'
 import Login from '../Components/Login'
 import SignUp from '../Components/SignUp'
+import Error from '../Components/Error'
 import '../css/landing.css'
 
-function Landing(props){
+function Landing(){
   const errors = useSelector(selectUserErrors)
 
   const renderErrors = () => {
-    if (errors.length > 0){
-      return errors.map(err => <p>{err.msg}</p>)
-    }
+    return errors.map((err, idx) => <Error key={idx} error={err} />)
   }
+
 
   return(
     <div id="landing">
-      {renderErrors()}
+      {errors.length > 0 ? renderErrors() : null}
       <Route path="/login" exact component={Login}/>  
       <Route path="/signup" exact component={SignUp} />
     </div>
   )
 }
 
-export default withRouter(Landing);
+export default Landing;

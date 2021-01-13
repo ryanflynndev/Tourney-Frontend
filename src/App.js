@@ -14,7 +14,7 @@ function App(props) {
   
   useEffect(() => {
     if (!currentUser._id) {
-      dispatch(grabUser(props));
+      dispatch(grabUser(props.history));
     }
   }, [currentUser])
 

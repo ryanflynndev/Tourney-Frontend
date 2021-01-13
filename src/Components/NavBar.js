@@ -74,9 +74,6 @@ function TemporaryDrawer(props) {
     >
       <List>
           <ListItem button >
-            <ListItemText primary="Logout" onClick={() => dispatch(logoutUser())}/>
-          </ListItem>
-          <ListItem button >
             <ListItemText primary="View Tournaments" onClick={() => props.history.push('/home/tournaments')}/>
           </ListItem>
           <ListItem button >
@@ -107,10 +104,18 @@ function TemporaryDrawer(props) {
               {list('left')}
             </Drawer>
           </>
-        <Typography variant="h6" className={classes.title}>
-          Tournament
-        </Typography>
-        <Button color="inherit" onClick={logoutHandler} >logout</Button>
+          <div id="navbar-btn-wrapper">
+            <Typography 
+              variant="h6" 
+              className="navbar-btn"
+              onClick={()=> props.history.push('/home')}
+            >TournamentHome</Typography>
+            <Typography 
+              variant="h6" 
+              className="navbar-btn"
+              onClick={()=>logoutHandler()}
+            >Logout</Typography>
+          </div>
       </Toolbar>
     </AppBar>
   </div>

@@ -21,15 +21,20 @@ export const { addError, setCurrentUser } = userSlice.actions;
 export const selectCurrentUser = state => state.user.currentUser;
 export const selectUserErrors = state => state.user.userErrors;
 
-export const grabUser = (props) => async dispatch => {
+export const grabUser = (history) => async dispatch => {
   const resp = await fetch('/user')
   const data = await resp.json()
   if (resp.status === 201){
-    console.log(data.user)
+    console.log("User logged in.", data.user)
     await dispatch(setCurrentUser(data.user))
-    console.log(props)
+    const location = history.location.pathname
+    if (location === "/"){
+      history.push('/home')
+    } else {
+      history.push(location)
+    }
   } else {
-    props.history.push('/login')
+    history.push('/login')
   }
 }
 
@@ -47,17 +52,16 @@ export const signUpUser = (user, history) => async dispatch => {
     const data = await resp.json();
     if (resp.status === 422){
       dispatch(addError(data.data))
-      throw new Error(data.message)
     }
-    if (resp.status !== 200 && resp.status !== 201){
-      console.log('Error')
-      throw new Error('Creating new user failed.')
-    } 
-    console.log(data.message)
-    await dispatch(setCurrentUser(data.user))
-    history.push('/home')
+    if (resp.status === 200){
+      await dispatch(setCurrentUser(data.user))
+      await dispatch(addError([]))
+      history.push('/home')
+    } else {
+      console.log('Error, signup failed')
+    }
   } catch (err){
-    dispatch(addError(err));
+    console.log(err)
   } 
 }
 
@@ -73,20 +77,18 @@ export const loginUser = (user, history) => async dispatch => {
   try {
     const resp = await fetch('/login', configObj);
     const data = await resp.json();
-    if (resp.status === 404 || resp.status === 401){
-      const err = [{msg: data.message}]
-      dispatch(addError(err))
-      throw new Error(data.message)
+    if (resp.status === 422){
+      dispatch(addError(data.data))
     } 
-    if (resp.status !== 200 && resp.status !== 201){
-      console.log('Error')
-      throw new Error('Login failed')
+    if (resp.status === 200){
+      await dispatch(setCurrentUser(data.user))
+      await dispatch(addError([]))
+      history.push('/home')
+    } else {
+      console.log('Error, login failed')
     }
-    console.log(data.message)
-    await dispatch(setCurrentUser(data.user))
-    history.push('/home')
   } catch (err){
-    dispatch(addError(err));
+    console.log(err);
   }
 }
 

@@ -25,10 +25,8 @@ function TournamentForm(){
       endDate: endDate,
       description: description
     }
-    console.log('insubmit', newTourney)
     dispatch(addTournamentFetch(newTourney))
   }
-  console.log('inside tournament form')
 
   return(
     <form onSubmit={e => submitHandler(e)}>
