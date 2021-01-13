@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import {withRouter} from 'react-router'
-import { signUpUser } from '../redux/user_slice'
+import { signUpUser, addError } from '../redux/user_slice'
 
 function SignUp(props){
   const dispatch = useDispatch();
@@ -22,6 +22,10 @@ function SignUp(props){
     setPassword('')
   }
 
+  const buttonHandler = () => {
+    dispatch(addError([]));
+    props.history.push('/login');
+  }
 
   return(
     <>
@@ -59,7 +63,7 @@ function SignUp(props){
       <div id="signup-btn-wrapper">
         <button 
           className="ui button" 
-          onClick={()=>props.history.push('/login')}
+          onClick={()=>buttonHandler()}
         >Back to Login</button>
       </div>
     </>
