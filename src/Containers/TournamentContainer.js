@@ -20,8 +20,7 @@ function TournamentContainer(){
   }, [])
 
     return(
-    <div>
-        Tournament Container
+    <div id="tournament-wrapper">
         <UpcomingTournaments />
         <CurrentTournaments/>
         <PastTournaments/>

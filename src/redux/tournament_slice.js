@@ -6,7 +6,7 @@ export const tournamentSlice = createSlice({
     upcomingTournaments: [],
     currentTournaments: [],
     pastTournaments: [],
-    tournament: {},
+    currentTournament: {},
     tournamentErrors: [],
   },
   reducers: {
@@ -19,8 +19,8 @@ export const tournamentSlice = createSlice({
     setPast: (state, action )=> {
       state.pastTournaments = action.payload.pastTournaments
     },
-    fetchById: (state, action) => {
-      state.post = action.payload.tournament
+    setCurrentTournament: (state, action) => {
+      state.currentTournament = action.payload.tournament
     },
     errorCatch: (state, action) => {
       state.tournamentErrors.push(action.payload)
@@ -35,7 +35,7 @@ export const {
   setUpcoming, 
   setCurrent, 
   setPast,
-  fetchById, 
+  setCurrentTournament, 
   errorCatch, 
   addTournament,
 } = tournamentSlice.actions;
@@ -44,10 +44,9 @@ export const upcomingTournamentFetch = () => async dispatch => {
   try {
     const resp = await fetch('/upcoming-tournaments')
     const data = await resp.json();
-    console.log(data)
     dispatch(setUpcoming(data))
   } catch (error){
-    dispatch(errorCatch(error))
+    console.log(error)
   }
     
 };
@@ -56,19 +55,17 @@ export const currentTournamentFetch =  () => async dispatch => {
     const resp = await fetch('/current-tournaments');
     const data = await resp.json();
     dispatch(setCurrent(data))
-    console.log(data)
   } catch (error){
-    dispatch(errorCatch(error))
+    console.log(error)
   }
 }
 export const pastTournamentFetch = () => async dispatch => {
   try {
     const resp = await fetch('/past-tournaments')
     const data = await resp.json()
-    console.log(data)
     dispatch(setPast(data))
   } catch (error){
-    dispatch(errorCatch(error))
+    console.log(error)
   }
 };
 
@@ -90,7 +87,7 @@ export const addTournamentFetch = (newTournament) => dispatch => {
     .catch(err => console.log(err))
 }
 
-export const addUserToTournamentFetch = (user, tournament) => async dispatch => {
+export const addUserToTournamentFetch = (tournament) => async dispatch => {
   const configObj = {
     method: 'PUT',
     headers: {
@@ -110,7 +107,7 @@ export const selectTournamentErrors = state => state.tournament.tournamentErrors
 export const selectUpcomingTournaments = state => state.tournament.upcomingTournaments;
 export const selectCurrentTournaments = state => state.tournament.currentTournaments;
 export const selectPastTournaments = state => state.tournament.pastTournaments;
-export const selectTournament = state => state.tournament.tournament;
-// export const selectEditTournament = state => state.tournament.editTournament;
+export const selectTournament = state => state.tournament.currentTournament;
+
 
 export default tournamentSlice.reducer;

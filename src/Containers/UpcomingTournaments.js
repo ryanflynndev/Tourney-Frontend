@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { 
-  selectUpcomingTournaments, upcomingTournamentFetch
+  selectUpcomingTournaments
 } from '../redux/tournament_slice'
 import TournamentCard from '../Components/TournamentCard'
 
@@ -8,23 +8,23 @@ function UpcomingTournaments(){
   const upcomingTournaments = useSelector(selectUpcomingTournaments)
 
     const renderUpcoming = () => {
+      if (upcomingTournaments.length > 0){
         const sorted = upcomingTournaments.slice().sort((a,b) => b.startDate - a.startDate)
+        
         return sorted.map(tourney => {
-          return (
-            <div key={tourney._id}>
-              {tourney.name}
-            </div>
-          )
+          return <TournamentCard key={tourney._id} tournament={tourney} joinable />
         })
+      } else {
+        return <p>No Upcoming Tournaments</p>
+      }
     }
     
-    console.log(upcomingTournaments)
 
     return(
-      <>
-        <div>Upcoming Tournaments</div>
-        {upcomingTournaments.length > 0 ? renderUpcoming() : null}
-      </>
+      <div>
+        <h2>Upcoming Tournaments</h2>
+        {renderUpcoming()}
+      </div>
     )
 }
 

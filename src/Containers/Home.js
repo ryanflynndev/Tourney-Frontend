@@ -6,6 +6,7 @@ import TournamentForm from '../Forms/TournamentForm'
 import {Route} from "react-router";
 import {selectCurrentUser} from '../redux/user_slice'
 import TournamentContainer from './TournamentContainer'
+import '../css/tournament-container.css'
 
 
 function Home(props){
