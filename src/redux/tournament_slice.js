@@ -13,7 +13,6 @@ export const tournamentSlice = createSlice({
   reducers: {
     setUpcoming(state, action ){
       state.upcomingTournaments = action.payload.upcomingTournaments
-      console.log(state.upcomingTournaments)
     },
     setCurrent(state, action ){
       state.currentTournaments = action.payload.currentTournaments
@@ -32,7 +31,6 @@ export const tournamentSlice = createSlice({
     },
     updateUpcomingTournament(state, action){
       const idx = state.upcomingTournaments.findIndex(t => t._id === action.payload.tournament._id)
-      console.log(idx)
       if (idx !== -1) state.upcomingTournaments[idx] = action.payload.tournament;
     },
   },

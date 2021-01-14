@@ -19,7 +19,6 @@ function UpcomingTournaments(){
       }
     }
     
-    console.log(upcomingTournaments)
     
     return(
       <div>

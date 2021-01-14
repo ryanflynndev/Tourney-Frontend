@@ -1,12 +1,43 @@
 import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {addUserToTournamentFetch} from '../redux/tournament_slice'
-import Button from '@material-ui/core/Button';
 import { selectCurrentUser } from '../redux/user_slice';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+const useStyles = makeStyles({
+  root: {
+    minWidth: 275,
+    textAlign: 'center',
+    alignItems: 'center',
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    // fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+    borderRadius: '6px',
+    background: '#605f5f',
+    color: 'white',
+  },
+  button: {
+    flexGrow: 1,
+  }
+});
+
 
 function TournamentCard({tournament, joinable}){
   const dispatch = useDispatch()
   const currentUser = useSelector(selectCurrentUser)
+  const classes = useStyles();
 
   const alreadyJoined = () => {
     const idx = currentUser.joinedTournaments.findIndex(t => t._id === tournament._id)
@@ -16,28 +47,45 @@ function TournamentCard({tournament, joinable}){
 
   const renderJoinButton = () => {
     return (
-      <Button 
-        onClick={()=>userJoin()}
-        disabled={alreadyJoined()}
-      >Join This Tournament</Button>)
+      <CardActions>
+        <Button 
+          className={classes.button}
+          onClick={()=>userJoin()}
+          disabled={alreadyJoined()}
+          size="large"
+        >Join This Tournament</Button>
+      </CardActions>
+      )
   }
-
   const userJoin = () => {
     dispatch(addUserToTournamentFetch(tournament))
   }
 
-  // console.log(currentUser.joinedTournaments)
+
+
 
   return(
-    <div >
-      <h4>Name: {tournament.name}</h4>
-      <h5>Start Date: {tournament.startDate}</h5>
-      <h5>End Date: {tournament.endDate}</h5>
-      <p>Description: {tournament.description}</p>
-      <p>Number of Particpants: {tournament.participants.length}</p>
-      <p>Player Limit: {tournament.playerLimit}</p>
-      {joinable ? renderJoinButton() : null}
-    </div>
+    <Card className={classes.root} variant="outlined" >
+      <CardContent>
+        <Typography variant="h4" className={classes.title} color="textPrimary" gutterBottom >{tournament.name}</Typography>
+        <Typography variant="h6" color="textSecondary" >
+          Start Date: {new Date(tournament.startDate).toDateString()}
+        </Typography>
+        <Typography variant="h6" color="textSecondary" >
+          End Date: {new Date(tournament.endDate).toDateString()}
+        </Typography>
+        <Typography className={classes.pos} >
+          Description: {tournament.description}
+        </Typography>
+        <Typography variant="body2" >
+          Number of Particpants: {tournament.participants.length}
+        </Typography>
+        <Typography variant="body2" >
+          Player Limit: {tournament.playerLimit}
+        </Typography>
+        {joinable ? renderJoinButton() : null}
+      </CardContent>
+    </Card>
   )
 }
 
