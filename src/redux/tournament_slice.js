@@ -1,4 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
+import {addTournamentToJoined} from './user_slice'
 
 export const tournamentSlice = createSlice({
   name: 'tournament',
@@ -10,24 +11,30 @@ export const tournamentSlice = createSlice({
     tournamentErrors: [],
   },
   reducers: {
-    setUpcoming: (state, action )=> {
+    setUpcoming(state, action ){
       state.upcomingTournaments = action.payload.upcomingTournaments
+      console.log(state.upcomingTournaments)
     },
-    setCurrent: (state, action )=> {
+    setCurrent(state, action ){
       state.currentTournaments = action.payload.currentTournaments
     },
-    setPast: (state, action )=> {
+    setPast(state, action ){
       state.pastTournaments = action.payload.pastTournaments
     },
-    setCurrentTournament: (state, action) => {
+    setCurrentTournament(state, action){
       state.currentTournament = action.payload.tournament
     },
-    errorCatch: (state, action) => {
+    errorCatch(state, action){
       state.tournamentErrors.push(action.payload)
     },
-    addTournament: (state, action) => {
-      state.tournaments.push(action.payload.tournament);
-    }
+    addTournament(state, action){
+      state.tournaments.push(action.payload.tournament)
+    },
+    updateUpcomingTournament(state, action){
+      const idx = state.upcomingTournaments.findIndex(t => t._id === action.payload.tournament._id)
+      console.log(idx)
+      if (idx !== -1) state.upcomingTournaments[idx] = action.payload.tournament;
+    },
   },
 });
 
@@ -38,6 +45,7 @@ export const {
   setCurrentTournament, 
   errorCatch, 
   addTournament,
+  updateUpcomingTournament,
 } = tournamentSlice.actions;
 
 export const upcomingTournamentFetch = () => async dispatch => {
@@ -48,7 +56,6 @@ export const upcomingTournamentFetch = () => async dispatch => {
   } catch (error){
     console.log(error)
   }
-    
 };
 export const currentTournamentFetch =  () => async dispatch => {
   try {
@@ -88,16 +95,23 @@ export const addTournamentFetch = (newTournament) => dispatch => {
 }
 
 export const addUserToTournamentFetch = (tournament) => async dispatch => {
-  const configObj = {
-    method: 'PUT',
-    headers: {
-      'Content-type': 'application/json',
-      'Accepts': 'application/json'
+  try {
+    const configObj = {
+      method: 'PUT',
+      headers: {
+        'Content-type': 'application/json',
+        'Accepts': 'application/json'
+      }
     }
+    const resp = await fetch(`/tournament/${tournament._id}/join`, configObj)
+    const data = await resp.json();
+    dispatch(updateUpcomingTournament(data));
+    const add = {_id: data.tournament._id};
+    dispatch(addTournamentToJoined(add));
+
+  } catch(error){
+    console.log(error)
   }
-  const resp = await fetch(`/tournament/${tournament._id}/join`, configObj)
-  const data = await resp.json();
-  console.log(data)
 }
 
 

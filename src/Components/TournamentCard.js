@@ -21,21 +21,24 @@ function TournamentCard({tournament, joinable}){
         disabled={alreadyJoined()}
       >Join This Tournament</Button>)
   }
+
   const userJoin = () => {
     dispatch(addUserToTournamentFetch(tournament))
   }
 
-    return(
-        <div >
-            <h4>Name: {tournament.name}</h4>
-            <h5>Start Date: {tournament.startDate}</h5>
-            <h5>End Date: {tournament.endDate}</h5>
-            <p>Description: {tournament.description}</p>
-            <p>Number of Particpants: {tournament.participants.length}</p>
-            <p>Player Limit: {tournament.playerLimit}</p>
-            {joinable ? renderJoinButton() : null}
-        </div>
-    )
+  // console.log(currentUser.joinedTournaments)
+
+  return(
+    <div >
+      <h4>Name: {tournament.name}</h4>
+      <h5>Start Date: {tournament.startDate}</h5>
+      <h5>End Date: {tournament.endDate}</h5>
+      <p>Description: {tournament.description}</p>
+      <p>Number of Particpants: {tournament.participants.length}</p>
+      <p>Player Limit: {tournament.playerLimit}</p>
+      {joinable ? renderJoinButton() : null}
+    </div>
+  )
 }
 
 export default TournamentCard;

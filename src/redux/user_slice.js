@@ -12,11 +12,14 @@ export const userSlice = createSlice({
     },
     setCurrentUser: (state, action) => {
       state.currentUser = action.payload
+    },
+    addTournamentToJoined: (state, action) => {
+      state.currentUser.joinedTournaments.push(action.payload)
     }
   }
 })
 
-export const { addError, setCurrentUser } = userSlice.actions;
+export const { addError, setCurrentUser, addTournamentToJoined } = userSlice.actions;
 
 export const selectCurrentUser = state => state.user.currentUser;
 export const selectUserErrors = state => state.user.userErrors;
