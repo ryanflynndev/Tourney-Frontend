@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import {useDispatch} from 'react-redux'
-import {
-  addTournamentFetch
-} from '../redux/tournament_slice'
+import {addTournamentFetch} from '../redux/tournament_slice'
+import '../css/form.css'
 
 function TournamentForm(){
   const dispatch = useDispatch();
@@ -29,7 +28,7 @@ function TournamentForm(){
   }
 
   return(
-    <form onSubmit={e => submitHandler(e)}>
+    <form onSubmit={e => submitHandler(e)} id="create-tournament-form">
       <label>Name:</label>
       <input 
         type="text" 
