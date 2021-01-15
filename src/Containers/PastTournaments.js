@@ -17,7 +17,7 @@ function PastTournaments(){
 
 
     return(
-        <div id="past-tournament-wrapper">
+        <div className="tournament-col-wrapper">
           <h2>Past Tournament</h2>
           {renderPastTournaments()}
         </div>

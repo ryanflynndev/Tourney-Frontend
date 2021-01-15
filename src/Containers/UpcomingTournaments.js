@@ -21,7 +21,7 @@ function UpcomingTournaments(){
     
     
     return(
-      <div>
+      <div className="tournament-col-wrapper">
         <h2>Upcoming Tournaments</h2>
         {renderUpcoming()}
       </div>

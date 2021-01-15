@@ -19,7 +19,7 @@ function CurrentTournaments(){
   }
 
     return(
-        <div>
+        <div className="tournament-col-wrapper" >
           <h2>Current Tournaments</h2>
           {renderCurrentTournaments()}
         </div>

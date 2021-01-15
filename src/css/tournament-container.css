@@ -3,3 +3,12 @@
   align-items: center;
   justify-content: space-between;
 }
+
+.tournament-col-wrapper{
+  width: 30%;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
