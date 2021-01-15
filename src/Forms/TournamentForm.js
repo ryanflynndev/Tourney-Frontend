@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {useDispatch} from 'react-redux'
 import {addTournamentFetch} from '../redux/tournament_slice'
 import '../css/form.css'
+import TextField from '@material-ui/core/TextField'
 
 function TournamentForm(){
   const dispatch = useDispatch();
@@ -29,12 +30,11 @@ function TournamentForm(){
 
   return(
     <form onSubmit={e => submitHandler(e)} id="create-tournament-form">
-      <label>Name:</label>
-      <input 
+      <TextField 
+        id="outlined-text" 
+        label="Name" 
         type="text" 
-        name="name"
-        id="name"
-        placeholder="Name..."
+        variant="outlined" 
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
@@ -48,37 +48,46 @@ function TournamentForm(){
           <option value="Golf">Golf</option>
           <option value="Bowling">Bowling</option>
       </select>
-      <label>Player Limit:</label>
-      <input 
-        type="number" 
-        name="playerLimit"
-        id="player-limit"
-        placeholder="Player Limit..."
-        value={playerLimit}
-        onChange={(e) => setPlayerLimit(e.target.value)}
-      />
-      <label>
-          Start Date:
-      </label>
-      <input 
-        type="date" 
-        id="startDate" 
+      <TextField
+          id="outlined-number"
+          label="Player Limit"
+          type="number"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          variant="outlined"
+          value={playerLimit}
+          onChange={(e) => setPlayerLimit(e.target.value)}
+        />
+      <TextField
+        id="datetime-local"
+        label="Start Date"
+        type="datetime-local"
+        defaultValue="2017-05-24T10:30"
+        // className={classes.textField}
+        InputLabelProps={{
+          shrink: true,
+        }}
         value={startDate} 
-        onChange={e => setStartDate(e.target.value)} />
-      <label>
-          End Date:
-      </label>
-      <input 
-        type="date" 
-        id="endDate" 
+        onChange={e => setStartDate(e.target.value)}
+      />
+      <TextField
+        id="datetime-local"
+        label="End Date"
+        type="datetime-local"
+        defaultValue="2017-05-24T10:30"
+        // className={classes.textField}
+        InputLabelProps={{
+          shrink: true,
+        }}
         value={endDate} 
-        onChange={e => setEndDate(e.target.value)} />
-      <label>
-        Description:
-      </label>
-      <input 
-        type="text"
-        id="description"
+        onChange={e => setEndDate(e.target.value)}
+      />
+      <TextField 
+        id="outlined-text" 
+        label="Description" 
+        type="text" 
+        variant="outlined" 
         value={description}
         onChange={e => setDescription(e.target.value)}
       />
