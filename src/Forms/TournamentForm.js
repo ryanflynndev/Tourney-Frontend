@@ -117,7 +117,11 @@ function TournamentForm(){
         value={description}
         onChange={e => setDescription(e.target.value)}
       />
-      <Button type="submit" color="primary" variant="outlined" className={classes.formControl}>Submit</Button>
+      <Button 
+        type="submit" 
+        color="primary" 
+        variant="outlined" 
+        className={classes.formControl}>Submit</Button>
     </form>
   )
 }
