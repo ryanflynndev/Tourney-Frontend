@@ -22,7 +22,7 @@
     margin: 4% 0 2% 0;
 }
 #signup-btn-wrapper button{
-    margin: 2% 0 4% 0;
+    margin: 4% 0 4% 0;
 }
 
 #login-form{
@@ -42,10 +42,11 @@
 #signup-form{
     background-color:  rgb(214, 234, 254);
     border-radius: 6px;
-    padding: 2% 0;
+    padding: 4% 0;
+    margin-bottom: 5%;
 
     width: 40vw;
-    height: 35vh;
+    height: fit-content;
 
     display: flex;
     flex-direction: column;
