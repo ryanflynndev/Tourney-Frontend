@@ -14,14 +14,13 @@ function Home(props){
   const currentUser = useSelector(selectCurrentUser)
 
   return(
-      <div>
+      <>
         <NavBar />
-        <h1>HOME PAGE</h1>
+        <h1 style={{textAlign: 'center'}}>HOME PAGE</h1>
         <Route path="/home/tournamentform" component={TournamentForm} />
         
         <Route path="/home/tournaments" component={TournamentContainer}/>
-        
-      </div>
+      </>
 
 
   )
