@@ -3,10 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Home from './Containers/Home';
 import Landing from './Containers/Landing'
 import {withRouter, Route} from 'react-router'
-import { 
-  selectCurrentUser,
-  grabUser,
-} from './redux/user_slice';
+import { selectCurrentUser, grabUser } from './redux/user_slice';
 
 function App(props) {
   const currentUser = useSelector(selectCurrentUser)
@@ -22,8 +19,8 @@ function App(props) {
 
   return (
     <>
-        <Route path="/home" component={Home} />
-        <Route patch="/" component={Landing} />
+        <Route path="/" component={Landing} />
+        <Route path="/home" exact component={Home} />
     </>
   );
 }
