@@ -17,7 +17,7 @@ function Home(props){
       <>
         <NavBar />
         <h1 style={{textAlign: 'center'}}>HOME PAGE</h1>
-        <Route path="/home/tournamentform" component={TournamentForm} />
+        <Route path="/home/tournament-form" component={TournamentForm} />
         
         <Route path="/home/tournaments" component={TournamentContainer}/>
       </>

@@ -31,7 +31,7 @@ export const grabUser = (history) => async dispatch => {
     console.log("User logged in.", data.user)
     await dispatch(setCurrentUser(data.user))
     const location = history.location.pathname
-    if (location === "/"){
+    if (location === "/" || location === "/login" || location === "/signup"){
       history.push('/home')
     } else {
       history.push(location)
@@ -56,7 +56,7 @@ export const signUpUser = (user, history) => async dispatch => {
     if (resp.status === 422){
       dispatch(addError(data.data))
     }
-    if (resp.status === 200){
+    if (resp.status === 201){
       await dispatch(setCurrentUser(data.user))
       await dispatch(addError([]))
       history.push('/home')
@@ -83,7 +83,7 @@ export const loginUser = (user, history) => async dispatch => {
     if (resp.status === 422){
       dispatch(addError(data.data))
     } 
-    if (resp.status === 200){
+    if (resp.status === 201){
       await dispatch(setCurrentUser(data.user))
       await dispatch(addError([]))
       history.push('/home')
@@ -102,7 +102,7 @@ export const logoutUser = (history) => async dispatch => {
     if (resp.status === 200){
       await dispatch(setCurrentUser({}))
     }
-    history.push('/')
+    history.push('/login')
   } catch (error){
     console.log(error)
   }

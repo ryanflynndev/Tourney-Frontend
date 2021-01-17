@@ -103,9 +103,15 @@ export const addUserToTournamentFetch = (tournament) => async dispatch => {
     }
     const resp = await fetch(`/tournament/${tournament._id}/join`, configObj)
     const data = await resp.json();
-    dispatch(updateUpcomingTournament(data));
-    const add = {_id: data.tournament._id};
-    dispatch(addTournamentToJoined(add));
+    if (resp.status === 200){
+      dispatch(updateUpcomingTournament(data));
+      const add = {_id: data.tournament._id};
+      dispatch(addTournamentToJoined(add));
+    } else if (resp.status === 201){
+      //COMES BACK WITH TOURNAMENT AND FIRST ROUND(W/MATCHES) DATA//
+
+      
+    }
 
   } catch(error){
     console.log(error)

@@ -13,7 +13,7 @@ function App(props) {
     if (!currentUser._id) {
       dispatch(grabUser(props.history));
     }
-  }, [currentUser, dispatch, props])
+  }, [])
 
   
 

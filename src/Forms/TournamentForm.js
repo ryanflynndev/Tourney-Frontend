@@ -14,8 +14,12 @@ const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: '40vw',
-
   },
+  componentWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  }
 }));
 
 
@@ -45,84 +49,87 @@ function TournamentForm(){
 
 
   return(
-    <form onSubmit={e => submitHandler(e)} id="create-tournament-form">
-      <TextField 
-        id="name"
-        className={classes.formControl} 
-        label="Name" 
-        type="text" 
-        variant="outlined" 
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      
-      <FormControl variant="outlined" className={classes.formControl} >
-        <InputLabel id="select-label">Category</InputLabel>
-        <Select
-            labelId="select-label"
-            label="Category"
-            id="category"
-            onChange={e => setCategory(e.target.value)} 
-            value={category}
-          >
-            <MenuItem value=""><em>None</em></MenuItem>
-            <MenuItem value="Tennis">Tennis</MenuItem>
-            <MenuItem value="Golf">Gold</MenuItem>
-            <MenuItem value="Bowling">Bowling</MenuItem>
-          </Select>
-      </FormControl>
-      <TextField
-          id="playerlimit"
+    <div className={classes.componentWrapper}>
+      <h3>Create New Tournament Form</h3>
+      <form onSubmit={e => submitHandler(e)} id="create-tournament-form">
+        <TextField 
+          id="name"
           className={classes.formControl} 
-          label="Player Limit"
-          type="number"
-          variant="outlined"
-          value={playerLimit}
-          onChange={(e) => setPlayerLimit(e.target.value)}
+          label="Name" 
+          type="text" 
+          variant="outlined" 
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
-      <TextField
-        id="startdate"
-        className={classes.formControl} 
-        label="Start Date"
-        type="datetime-local"
-        defaultValue="2017-05-24T10:30"
-        // className={classes.textField}
-        InputLabelProps={{
-          shrink: true,
-        }}
-        value={startDate} 
-        onChange={e => setStartDate(e.target.value)}
-      />
-      <TextField
-        id="enddate"
-        className={classes.formControl} 
-        label="End Date"
-        type="datetime-local"
-        defaultValue="2017-05-24T10:30"
-        // className={classes.textField}
-        InputLabelProps={{
-          shrink: true,
-        }}
-        value={endDate} 
-        onChange={e => setEndDate(e.target.value)}
-      />
-      <TextField 
-        id="description" 
-        className={classes.formControl} 
-        multiline
-        rows={5}
-        label="Description" 
-        type="text" 
-        variant="outlined" 
-        value={description}
-        onChange={e => setDescription(e.target.value)}
-      />
-      <Button 
-        type="submit" 
-        color="primary" 
-        variant="outlined" 
-        className={classes.formControl}>Submit</Button>
-    </form>
+        
+        <FormControl variant="outlined" className={classes.formControl} >
+          <InputLabel id="select-label">Category</InputLabel>
+          <Select
+              labelId="select-label"
+              label="Category"
+              id="category"
+              onChange={e => setCategory(e.target.value)} 
+              value={category}
+            >
+              <MenuItem value=""><em>None</em></MenuItem>
+              <MenuItem value="Tennis">Tennis</MenuItem>
+              <MenuItem value="Golf">Gold</MenuItem>
+              <MenuItem value="Bowling">Bowling</MenuItem>
+            </Select>
+        </FormControl>
+        <TextField
+            id="playerlimit"
+            className={classes.formControl} 
+            label="Player Limit"
+            type="number"
+            variant="outlined"
+            value={playerLimit}
+            onChange={(e) => setPlayerLimit(e.target.value)}
+          />
+        <TextField
+          id="startdate"
+          className={classes.formControl} 
+          label="Start Date"
+          type="datetime-local"
+          defaultValue="2017-05-24T10:30"
+          // className={classes.textField}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          value={startDate} 
+          onChange={e => setStartDate(e.target.value)}
+        />
+        <TextField
+          id="enddate"
+          className={classes.formControl} 
+          label="End Date"
+          type="datetime-local"
+          defaultValue="2017-05-24T10:30"
+          // className={classes.textField}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          value={endDate} 
+          onChange={e => setEndDate(e.target.value)}
+        />
+        <TextField 
+          id="description" 
+          className={classes.formControl} 
+          multiline
+          rows={5}
+          label="Description" 
+          type="text" 
+          variant="outlined" 
+          value={description}
+          onChange={e => setDescription(e.target.value)}
+        />
+        <Button 
+          type="submit" 
+          color="primary" 
+          variant="outlined" 
+          className={classes.formControl}>Submit</Button>
+      </form>
+    </div>
   )
 }
 
