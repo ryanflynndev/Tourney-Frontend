@@ -7,7 +7,7 @@ export const tournamentSlice = createSlice({
     upcomingTournaments: [],
     currentTournaments: [],
     pastTournaments: [],
-    currentTournament: {},
+    tournamentInUse: {},
     tournamentErrors: [],
   },
   reducers: {
@@ -20,14 +20,23 @@ export const tournamentSlice = createSlice({
     setPast(state, action ){
       state.pastTournaments = action.payload.pastTournaments
     },
-    setCurrentTournament(state, action){
-      state.currentTournament = action.payload.tournament
+    setInUse(state, action){
+      state.tournamentInUse = action.payload.tournament
     },
     errorCatch(state, action){
       state.tournamentErrors.push(action.payload)
     },
     addTournament(state, action){
-      state.tournaments.push(action.payload.tournament)
+      //ADD TO UPCOMING
+      if (action.payload.message === "Upcoming"){
+        state.upcomingTournaments.push(action.payload.tournament)
+        //ADD TO CURRENT
+      } else if (action.payload.message === "Current"){
+        state.currentTournaments.push(action.payload.tournament)
+        //ADD TO PAST
+      } else if (action.payload.message === "Past"){
+        state.pastTournaments.push(action.payload.tournament)
+      }
     },
     updateUpcomingTournament(state, action){
       const idx = state.upcomingTournaments.findIndex(t => t._id === action.payload.tournament._id)
@@ -59,6 +68,7 @@ export const currentTournamentFetch =  () => async dispatch => {
   try {
     const resp = await fetch('/current-tournaments');
     const data = await resp.json();
+    console.log(data)
     dispatch(setCurrent(data))
   } catch (error){
     console.log(error)
@@ -109,7 +119,7 @@ export const addUserToTournamentFetch = (tournament) => async dispatch => {
       dispatch(addTournamentToJoined(add));
     } else if (resp.status === 201){
       //COMES BACK WITH TOURNAMENT AND FIRST ROUND(W/MATCHES) DATA//
-
+      
       
     }
 
