@@ -49,7 +49,7 @@ export const {
   setUpcoming, 
   setCurrent, 
   setPast,
-  setCurrentTournament, 
+  setInUse, 
   errorCatch, 
   addTournament,
   updateUpcomingTournament,
@@ -83,7 +83,6 @@ export const pastTournamentFetch = () => async dispatch => {
     console.log(error)
   }
 };
-
 export const addTournamentFetch = (newTournament) => dispatch => {
   const configObj = {
     method: 'POST',
@@ -102,7 +101,7 @@ export const addTournamentFetch = (newTournament) => dispatch => {
     .catch(err => console.log(err))
 }
 
-export const addUserToTournamentFetch = (tournament) => async dispatch => {
+export const addUserToTournamentFetch = (tournament, history) => async dispatch => {
   try {
     const configObj = {
       method: 'PUT',
@@ -119,10 +118,12 @@ export const addUserToTournamentFetch = (tournament) => async dispatch => {
       dispatch(addTournamentToJoined(add));
     } else if (resp.status === 201){
       //COMES BACK WITH TOURNAMENT AND FIRST ROUND(W/MATCHES) DATA//
-      
-      
+      dispatch(addTournament(data))
+      const add = {_id: data.tournament._id};
+      dispatch(addTournamentToJoined(add))
+      dispatch(setInUse(data))
+      history.push(`/home/tournament/${data.tournament._id}`)
     }
-
   } catch(error){
     console.log(error)
   }
@@ -135,7 +136,7 @@ export const selectTournamentErrors = state => state.tournament.tournamentErrors
 export const selectUpcomingTournaments = state => state.tournament.upcomingTournaments;
 export const selectCurrentTournaments = state => state.tournament.currentTournaments;
 export const selectPastTournaments = state => state.tournament.pastTournaments;
-export const selectTournament = state => state.tournament.currentTournament;
+export const selectInUse = state => state.tournament.tournamentInUse;
 
 
 export default tournamentSlice.reducer;

@@ -1,5 +1,6 @@
 import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
+import {withRouter} from 'react-router'
 import {addUserToTournamentFetch} from '../redux/tournament_slice'
 import { selectCurrentUser } from '../redux/user_slice';
 import { makeStyles } from '@material-ui/core/styles';
@@ -34,13 +35,13 @@ const useStyles = makeStyles({
 });
 
 
-function TournamentCard({tournament, joinable}){
+function TournamentCard(props){
   const dispatch = useDispatch()
   const currentUser = useSelector(selectCurrentUser)
   const classes = useStyles();
 
   const alreadyJoined = () => {
-    const idx = currentUser.joinedTournaments.findIndex(t => t._id === tournament._id)
+    const idx = currentUser.joinedTournaments.findIndex(t => t._id === props.tournament._id)
     if (idx === -1) return false
     return true
   }
@@ -58,35 +59,35 @@ function TournamentCard({tournament, joinable}){
       )
   }
   const userJoin = () => {
-    dispatch(addUserToTournamentFetch(tournament))
+    dispatch(addUserToTournamentFetch(props.tournament, props.history))
   }
 
-
+  console.log(props)
 
 
   return(
     <Card className={classes.root} variant="outlined" >
       <CardContent>
-        <Typography variant="h4" className={classes.title} color="textPrimary" gutterBottom >{tournament.name}</Typography>
+        <Typography variant="h4" className={classes.title} color="textPrimary" gutterBottom >{props.tournament.name}</Typography>
         <Typography variant="h6" color="textSecondary" >
-          Start Date: {new Date(tournament.startDate).toDateString()}
+          Start Date: {new Date(props.tournament.startDate).toDateString()}
         </Typography>
         <Typography variant="h6" color="textSecondary" >
-          End Date: {new Date(tournament.endDate).toDateString()}
+          End Date: {new Date(props.tournament.endDate).toDateString()}
         </Typography>
         <Typography className={classes.pos} >
-          Description: {tournament.description}
+          Description: {props.tournament.description}
         </Typography>
         <Typography variant="body2" >
-          Number of Particpants: {tournament.participants.length}
+          Number of Particpants: {props.tournament.participants.length}
         </Typography>
         <Typography variant="body2" >
-          Player Limit: {tournament.playerLimit}
+          Player Limit: {props.tournament.playerLimit}
         </Typography>
-        {joinable ? renderJoinButton() : null}
+        {props.joinable ? renderJoinButton() : null}
       </CardContent>
     </Card>
   )
 }
 
-export default TournamentCard;
+export default withRouter(TournamentCard);
