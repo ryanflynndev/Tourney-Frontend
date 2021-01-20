@@ -7,6 +7,7 @@
     height: 90vh;
 }
 #signup-btn-wrapper{
+    min-width: 220px;
     width: 40vw;
     height: fit-content;
 
@@ -31,6 +32,7 @@
     padding: 4% 0;
     margin-bottom: 5%;
 
+    min-width: 220px;
     width: 40vw;
     height: fit-content;
 

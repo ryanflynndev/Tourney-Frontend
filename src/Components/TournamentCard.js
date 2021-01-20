@@ -62,7 +62,6 @@ function TournamentCard(props){
     dispatch(addUserToTournamentFetch(props.tournament, props.history))
   }
 
-  console.log(props)
 
 
   return(
