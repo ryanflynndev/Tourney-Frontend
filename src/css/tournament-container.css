@@ -6,7 +6,11 @@
 
 .tournament-col-wrapper{
   width: 30%;
-  height: 100vh;
+  max-height: 80vh;
+  overflow-y: scroll;
+  z-index: 1;
+  margin-bottom: 2%;
+
 
   display: flex;
   flex-direction: column;
