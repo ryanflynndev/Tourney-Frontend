@@ -50,7 +50,7 @@ function TournamentForm(){
 
   return(
     <div className={classes.componentWrapper}>
-      <h3>Create New Tournament Form</h3>
+      <h3>Create New Tournament</h3>
       <form onSubmit={e => submitHandler(e)} id="create-tournament-form">
         <TextField 
           id="name"
@@ -73,8 +73,8 @@ function TournamentForm(){
             >
               <MenuItem value=""><em>None</em></MenuItem>
               <MenuItem value="Tennis">Tennis</MenuItem>
-              <MenuItem value="Golf">Gold</MenuItem>
               <MenuItem value="Bowling">Bowling</MenuItem>
+              <MenuItem value="Golf">Golf</MenuItem>
             </Select>
         </FormControl>
         <TextField

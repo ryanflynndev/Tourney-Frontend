@@ -48,14 +48,21 @@ function TournamentCard(props){
 
   const renderJoinButton = () => {
     return (
-      <CardActions>
         <Button 
           className={classes.button}
           onClick={()=>userJoin()}
           disabled={alreadyJoined()}
           size="large"
         >Join This Tournament</Button>
-      </CardActions>
+
+      // <CardActions>
+      // <Button 
+      //   className={classes.button}
+      //   onClick={()=>userJoin()}
+      //   disabled={alreadyJoined()}
+      //   size="large"
+      // >Join This Tournament</Button>
+      // </CardActions>
       )
   }
   const userJoin = () => {
@@ -65,27 +72,49 @@ function TournamentCard(props){
 
 
   return(
-    <Card className={classes.root} variant="outlined" >
-      <CardContent>
-        <Typography variant="h4" className={classes.title} color="textPrimary" gutterBottom >{props.tournament.name}</Typography>
-        <Typography variant="h6" color="textSecondary" >
-          Start Date: {new Date(props.tournament.startDate).toDateString()}
-        </Typography>
-        <Typography variant="h6" color="textSecondary" >
-          End Date: {new Date(props.tournament.endDate).toDateString()}
-        </Typography>
-        <Typography className={classes.pos} >
-          Description: {props.tournament.description}
-        </Typography>
-        <Typography variant="body2" >
-          Number of Particpants: {props.tournament.participants.length}
-        </Typography>
-        <Typography variant="body2" >
-          Player Limit: {props.tournament.playerLimit}
-        </Typography>
-        {props.joinable ? renderJoinButton() : null}
-      </CardContent>
-    </Card>
+
+    <div className="ui special cards">
+      <div className="card">
+        <div className="blurring dimmable image">
+          <div className="ui dimmer">
+            <div className="content">
+              <div className="center">
+                {renderJoinButton()}
+              </div>
+            </div>
+          </div>
+          <img src="https://drive.google.com/uc?id=1HS7NUYT6seFL6MAp0krU3l7dyYgBVHux"></img>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+    // <Card className={classes.root} variant="outlined" >
+    //   <CardContent>
+    //     <Typography variant="h4" className={classes.title} color="textPrimary" gutterBottom >{props.tournament.name}</Typography>
+    //     <Typography variant="h6" color="textSecondary" >
+    //       Start Date: {new Date(props.tournament.startDate).toDateString()}
+    //     </Typography>
+    //     <Typography variant="h6" color="textSecondary" >
+    //       End Date: {new Date(props.tournament.endDate).toDateString()}
+    //     </Typography>
+    //     <Typography className={classes.pos} >
+    //       Description: {props.tournament.description}
+    //     </Typography>
+    //     <Typography variant="body2" >
+    //       Number of Particpants: {props.tournament.participants.length}
+    //     </Typography>
+    //     <Typography variant="body2" >
+    //       Player Limit: {props.tournament.playerLimit}
+    //     </Typography>
+    //     {props.joinable ? renderJoinButton() : null}
+    //   </CardContent>
+    // </Card>
   )
 }
 
