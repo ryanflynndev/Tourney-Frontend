@@ -93,7 +93,7 @@ function TemporaryDrawer(props) {
 
   return (
     <div className={classes.root}>
-    <AppBar position="static">
+    <AppBar position="static" style={{backgroundColor: '#191824'}}>
       <Toolbar>
           <>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
