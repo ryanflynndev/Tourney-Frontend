@@ -12,7 +12,7 @@ function UpcomingTournaments(){
         const sorted = upcomingTournaments.slice().sort((a,b) => b.startDate - a.startDate)
         
         return sorted.map(tourney => {
-          return <TournamentCard key={tourney._id} tournament={tourney} joinable />
+          return <TournamentCard key={tourney._id} tournament={tourney} type={"upcoming"} joinable />
         })
       } else {
         return <p>No Upcoming Tournaments</p>
@@ -23,7 +23,9 @@ function UpcomingTournaments(){
     return(
       <div className="tournament-col-wrapper">
         <h2>Upcoming Tournaments</h2>
-        {renderUpcoming()}
+        <div className="t-card-wrapper">
+          {renderUpcoming()}
+        </div>
       </div>
     )
 }

@@ -25,10 +25,6 @@ const useStyles = makeStyles((theme) => ({
   list: {
     width: 250,
   },
-  fullList: {
-    width: 'auto',
-    
-  },
   root: {
     flexGrow: 1,
   },
@@ -42,43 +38,37 @@ const useStyles = makeStyles((theme) => ({
 
 function TemporaryDrawer(props) {
   const dispatch = useDispatch();
-
+  const classes = useStyles();
   const logoutHandler = () => {
     dispatch(logoutUser(props.history))
   }
 
-  const classes = useStyles();
-  const [state, setState] = useState({
-    top: false,
-    left: false,
-    bottom: false,
-    right: false,
-  });
+  const [state, setState] = useState({left: false});
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
-
     setState({ ...state, [anchor]: open });
   };
 
-  const list = (anchor) => (
+  const list = () => (
     <div
-      className={clsx(classes.list, {
-        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
-      })}
+      className={clsx(classes.list)}
       role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
+      onClick={toggleDrawer('left', false)}
+      onKeyDown={toggleDrawer('left', false)}>
       <List>
-          <ListItem button >
-            <ListItemText primary="View Tournaments" onClick={() => props.history.push('/tournaments')}/>
-          </ListItem>
-          <ListItem button >
-            <ListItemText primary="Create Tournament" onClick={() => props.history.push('/tournament-form')}/>
-          </ListItem>
+        <ListItem button >
+          <ListItemText 
+            primary="View Tournaments" 
+            onClick={() => props.history.push('/tournaments')}/>
+        </ListItem>
+        <ListItem button >
+          <ListItemText 
+            primary="Create Tournament" 
+            onClick={() => props.history.push('/tournament-form')}/>
+        </ListItem>
       </List>
       <Divider />
       {/* <List>
@@ -100,21 +90,21 @@ function TemporaryDrawer(props) {
             <MenuIcon onClick={toggleDrawer('left', true)} />
           </IconButton>
             
-            <Drawer anchor={'left'} open={state['left']} onClose={toggleDrawer('left', false)}>
-              {list('left')}
+            <Drawer open={state['left']} onClose={toggleDrawer('left', false)}>
+              {list()}
             </Drawer>
           </>
           <div id="navbar-btn-wrapper">
             <Typography 
               variant="h6" 
               className="navbar-btn"
-              onClick={()=> props.history.push('/home')}
-            >TournamentHome</Typography>
+              onClick={()=> props.history.push('/home')}>Tournament App
+            </Typography>
             <Typography 
               variant="h6" 
               className="navbar-btn"
-              onClick={()=>logoutHandler()}
-            >Logout</Typography>
+              onClick={()=>logoutHandler()}>Logout
+            </Typography>
           </div>
       </Toolbar>
     </AppBar>
@@ -124,30 +114,3 @@ function TemporaryDrawer(props) {
 
 export default withRouter(TemporaryDrawer);
 
-// function NavBar(props){
-
-
-  // return(
-  //   <div id="nav-container">
-  //     <div id="nav-left">
-  //       <p>App Icon</p>
-
-  //       <p>App Name</p>
-  //     </div>
-  //     <div id="nav-center">
-  //       <Search />
-  //     </div>
-  //     <div id="nav-right">
-  //       <select value="Drop down of Options">
-  //         <option>View Tournaments</option>
-  //         <option
-  //           onSelect={() => props.history.push('/tournament-form')}
-  //         >Create Tournament</option>
-  //         <option>View Profile</option>
-  //       </select>
-  //       <button>Log Out</button>
-  //     </div>
-  //   </div>
-  // )
-// }
-// export default withRouter(NavBar);

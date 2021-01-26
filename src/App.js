@@ -8,6 +8,9 @@ import TournamentForm from './Forms/TournamentForm'
 import TournamentContainer from './Containers/TournamentContainer'
 import TournamentShow from './Components/TournamentShow'
 import NavBar from './Components/NavBar'
+import UpcomingTournamentShow from './Components/UpcomingTournamentShow'
+import CurrentTournamentShow from './Components/CurrentTournamentShow'
+import PastTournamentShow from './Components/PastTournamentShow'
 
 function App(props) {
   const currentUser = useSelector(selectCurrentUser)
@@ -29,7 +32,9 @@ function App(props) {
           <Route path="/home" component={Home} />
           <Route path="/tournament-form" component={TournamentForm} />
           <Route path="/tournaments" component={TournamentContainer}/>
-          <Route path="/tournament" component={TournamentShow} />
+          <Route path="/upcoming-tournament/:id" component={UpcomingTournamentShow} />
+          <Route path="/current-tournament/:id" component={CurrentTournamentShow} />
+          <Route path="/past-tournament/:id" component={PastTournamentShow} />
         </Switch>
 
     </>

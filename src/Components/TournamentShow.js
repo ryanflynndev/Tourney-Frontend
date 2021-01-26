@@ -10,6 +10,7 @@ function TournamentShow(){
   return (
     <div>
       TOURNAMENT SHOW
+
     </div>
   )
 }

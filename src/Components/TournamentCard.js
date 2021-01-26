@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {withRouter} from 'react-router'
-import {addUserToTournamentFetch} from '../redux/tournament_slice'
+import {addUserToTournamentFetch, setInUse} from '../redux/tournament_slice'
 import { selectCurrentUser } from '../redux/user_slice';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -47,39 +47,27 @@ function TournamentCard(props){
     return true
   }
 
-  const renderJoinButton = () => {
-    return (
-        // <Button 
-        //   className={classes.button}
-        //   onClick={()=>userJoin()}
-        //   disabled={alreadyJoined()}=
-        //   size="large"
-        // >Join This Tournament</Button>
-        <div className="ui inverted button" onClick={() => userJoin()} disabled={alreadyJoined()}>Join Tournament</div>
 
-      // <CardActions>
-      // <Button 
-      //   className={classes.button}
-      //   onClick={()=>userJoin()}
-      //   disabled={alreadyJoined()}
-      //   size="large"
-      // >Join This Tournament</Button>
-      // </CardActions>
-      )
-  }
   const userJoin = () => {
     dispatch(addUserToTournamentFetch(props.tournament, props.history))
   }
 
-  // useEffect(() => {
-  //   $('.special.cards .image').dimmer({
-  //     on: 'hover'
-  //   });
-  // })
+  const clickHandler = () => {
+    dispatch(setInUse(props.tournament))
+    if(props.type === "upcoming"){
+      props.history.push(`/upcoming-tournament/${props.tournament._id}`)   
+    } else if(props.type === "current"){
+      props.history.push(`/current-tournament/${props.tournament._id}`) 
+    } else if (props.type === 'past'){
+      props.history.push(`/past-tournament/${props.tournament._id}`) 
+    }
+    
+  }
+
 
   return(
 
-    <div className="ui special cards">
+    <div className="ui special cards" onClick={()=>clickHandler()}>
       <div className="card">
         <div className="blurring dimmable image">
           <div className="ui dimmer">
@@ -112,27 +100,7 @@ function TournamentCard(props){
 
 
 
-    // <Card className={classes.root} variant="outlined" >
-    //   <CardContent>
-    //     <Typography variant="h4" className={classes.title} color="textPrimary" gutterBottom >{props.tournament.name}</Typography>
-    //     <Typography variant="h6" color="textSecondary" >
-    //       Start Date: {new Date(props.tournament.startDate).toDateString()}
-    //     </Typography>
-    //     <Typography variant="h6" color="textSecondary" >
-    //       End Date: {new Date(props.tournament.endDate).toDateString()}
-    //     </Typography>
-    //     <Typography className={classes.pos} >
-    //       Description: {props.tournament.description}
-    //     </Typography>
-    //     <Typography variant="body2" >
-    //       Number of Particpants: {props.tournament.participants.length}
-    //     </Typography>
-    //     <Typography variant="body2" >
-    //       Player Limit: {props.tournament.playerLimit}
-    //     </Typography>
-    //     {props.joinable ? renderJoinButton() : null}
-    //   </CardContent>
-    // </Card>
+
   )
 }
 

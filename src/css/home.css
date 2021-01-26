@@ -1,0 +1,28 @@
+#header {
+  text-align: center;
+}
+
+#tournament-wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.tournament-col-wrapper{
+  width: 90vw;
+  display: flex;
+  flex-direction: column;
+}
+.t-card-wrapper{
+  display: flex;
+}
+
+.ui.card, .ui.cards>.card{
+  width: 160px;
+}
+
+.ui.cards>.card>.image>img{
+  height: 200px;
+  /* width: 120px; */
+}

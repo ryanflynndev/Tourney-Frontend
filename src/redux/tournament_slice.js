@@ -21,7 +21,7 @@ export const tournamentSlice = createSlice({
       state.pastTournaments = action.payload.pastTournaments
     },
     setInUse(state, action){
-      state.tournamentInUse = action.payload.tournament
+      state.tournamentInUse = action.payload
     },
     errorCatch(state, action){
       state.tournamentErrors.push(action.payload)
@@ -121,8 +121,8 @@ export const addUserToTournamentFetch = (tournament, history) => async dispatch 
       dispatch(addTournament(data))
       const add = {_id: data.tournament._id};
       dispatch(addTournamentToJoined(add))
-      dispatch(setInUse(data))
-      history.push(`/home/tournament/${data.tournament._id}`)
+      dispatch(setInUse(data.tournament))
+      history.push(`/tournament/${data.tournament._id}`)
     }
   } catch(error){
     console.log(error)

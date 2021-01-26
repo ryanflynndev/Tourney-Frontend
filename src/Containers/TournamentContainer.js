@@ -21,9 +21,7 @@ function TournamentContainer(){
 
     return(
     <div id="tournament-wrapper">
-        <UpcomingTournaments />
-        <CurrentTournaments/>
-        <PastTournaments/>
+      <div>Search For Tournaments Here</div>
     </div>)
 
 }

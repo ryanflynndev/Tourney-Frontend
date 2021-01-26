@@ -11,7 +11,7 @@ function CurrentTournaments(){
   const renderCurrentTournaments = () => {
     if (currentTournaments.length > 0){
       return currentTournaments.map(tourney => {
-        return <TournamentCard key={tourney._id} tournament={tourney} />
+        return <TournamentCard key={tourney._id} tournament={tourney} type={"current"} />
       })
     } else {
       return <p>No Current Tournaments</p>
@@ -21,7 +21,9 @@ function CurrentTournaments(){
     return(
         <div className="tournament-col-wrapper" >
           <h2>Current Tournaments</h2>
-          {renderCurrentTournaments()}
+          <div className="t-card-wrapper">
+            {renderCurrentTournaments()}
+          </div>
         </div>
     )
 }
