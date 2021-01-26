@@ -74,10 +74,10 @@ function TemporaryDrawer(props) {
     >
       <List>
           <ListItem button >
-            <ListItemText primary="View Tournaments" onClick={() => props.history.push('/home/tournaments')}/>
+            <ListItemText primary="View Tournaments" onClick={() => props.history.push('/tournaments')}/>
           </ListItem>
           <ListItem button >
-            <ListItemText primary="Create Tournament" onClick={() => props.history.push('/home/tournament-form')}/>
+            <ListItemText primary="Create Tournament" onClick={() => props.history.push('/tournament-form')}/>
           </ListItem>
       </List>
       <Divider />

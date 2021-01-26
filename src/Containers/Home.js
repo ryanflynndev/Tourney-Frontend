@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Switch } from 'react-router-dom'
 import NavBar from '../Components/NavBar'
 import {Route} from "react-router";
 import {selectCurrentUser} from '../redux/user_slice'
@@ -16,11 +16,8 @@ function Home(props){
 
   return(
       <>
-        <NavBar />
         <h1 style={{textAlign: 'center'}}>HOME PAGE</h1>
-        <Route path="/home/tournament-form" component={TournamentForm} />
-        <Route path="/home/tournaments" component={TournamentContainer}/>
-        <Route path="/home/tournament/" component={TournamentShow} />
+
       </>
 
 
