@@ -55,6 +55,17 @@ export const {
   updateUpcomingTournament,
 } = tournamentSlice.actions;
 
+export const inUseFetch = (id) => async dispatch => {
+  try{
+    const resp = await fetch(`/tournament/${id}`)
+    const data = await resp.json()
+    console.log(data)
+    dispatch(setInUse(data.tournament))
+  }catch (error){
+    console.log(error)
+  }
+}
+
 export const upcomingTournamentFetch = () => async dispatch => {
   try {
     const resp = await fetch('/upcoming-tournaments')
