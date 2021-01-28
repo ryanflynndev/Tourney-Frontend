@@ -10,6 +10,7 @@ function UpcomingTournmanentShow(props) {
     const user = useSelector(selectCurrentUser)
     const tournament = useSelector(selectInUse)
     console.log(tournament)
+    console.log(user)
     useEffect(()=> {
         if(Object.keys(tournament).length === 0){
             dispatch(inUseFetch(props.match.params.id))
@@ -20,7 +21,11 @@ function UpcomingTournmanentShow(props) {
     }
 
     const userAlreadyJoined = () => {
-        if(tournament.participants.includes(user._id) || tournament.participants.length === tournament.playerLimit ){
+        const joined = user.joinedTournaments.map((tourney) => {
+            return tourney._id
+        })
+
+        if(joined.includes(tournament._id) || tournament.participants.length === tournament.playerLimit ){
             return true
         } else {
             return false
@@ -28,11 +33,9 @@ function UpcomingTournmanentShow(props) {
     }
 
     const renderParticipants = () => {
-        if (tournament.participants){
-            return tournament.participants.map((person) => {
-                return <p>{person.username}</p>
-            })
-        }
+        return tournament.participants.map((person) => {
+            return <p>{person.username}</p>
+        })
     }
 
     const renderComponent = () => {
@@ -44,7 +47,8 @@ function UpcomingTournmanentShow(props) {
                 <div>End Date: {new Date(tournament.endDate).toDateString()}</div>
                 <p>Description: {tournament.description}</p>
                 <div>Participants: {renderParticipants()}</div>
-                <button disabled={tournament.participants ? userAlreadyJoined() : null} onClick={joinTournamentHandler}>Join Tournament</button>
+                <div>Player Limit: {tournament.playerLimit}</div>
+                <button disabled={userAlreadyJoined()} onClick={joinTournamentHandler}>Join Tournament</button>
             </>
         )
     }

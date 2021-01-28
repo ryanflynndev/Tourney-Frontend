@@ -119,6 +119,7 @@ export const addUserToTournamentFetch = (tournament, history) => async dispatch 
       dispatch(updateUpcomingTournament(data));
       const add = {_id: data.tournament._id};
       dispatch(addTournamentToJoined(add));
+      dispatch(setInUse(data.tournament))
     } else if (resp.status === 201){
       //COMES BACK WITH TOURNAMENT AND FIRST ROUND(W/MATCHES) DATA//
       dispatch(addTournament(data))

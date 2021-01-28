@@ -61,31 +61,33 @@ function TournamentForm(){
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
+        <TextField 
+          id="category"
+          className={classes.formControl} 
+          label="Category" 
+          type="text" 
+          variant="outlined" 
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+        />
         
         <FormControl variant="outlined" className={classes.formControl} >
-          <InputLabel id="select-label">Category</InputLabel>
+          <InputLabel id="select-label">Player Limit</InputLabel>
           <Select
               labelId="select-label"
-              label="Category"
-              id="category"
-              onChange={e => setCategory(e.target.value)} 
-              value={category}
+              label="Player Limit"
+              id="playerlimit"
+              onChange={e => setPlayerLimit(e.target.value)} 
+              value={playerLimit}
             >
               <MenuItem value=""><em>None</em></MenuItem>
-              <MenuItem value="Tennis">Tennis</MenuItem>
-              <MenuItem value="Bowling">Bowling</MenuItem>
-              <MenuItem value="Golf">Golf</MenuItem>
+              <MenuItem value="2">2</MenuItem>
+              <MenuItem value="4">4</MenuItem>
+              <MenuItem value="8">8</MenuItem>
+              <MenuItem value="16">16</MenuItem>
+              <MenuItem value="32">32</MenuItem>
             </Select>
         </FormControl>
-        <TextField
-            id="playerlimit"
-            className={classes.formControl} 
-            label="Player Limit"
-            type="number"
-            variant="outlined"
-            value={playerLimit}
-            onChange={(e) => setPlayerLimit(e.target.value)}
-          />
         <TextField
           id="startdate"
           className={classes.formControl} 
