@@ -79,7 +79,6 @@ export const currentTournamentFetch =  () => async dispatch => {
   try {
     const resp = await fetch('/current-tournaments');
     const data = await resp.json();
-    console.log(data)
     dispatch(setCurrent(data))
   } catch (error){
     console.log(error)
