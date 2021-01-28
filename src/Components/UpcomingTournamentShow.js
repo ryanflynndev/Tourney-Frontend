@@ -26,11 +26,32 @@ function UpcomingTournmanentShow(props) {
             return false
         }
     }
+
+    const renderParticipants = () => {
+        if (tournament.participants){
+            return tournament.participants.map((person) => {
+                return <p>{person.username}</p>
+            })
+        }
+    }
+
+    const renderComponent = () => {
+        return (
+            <>
+                <h1>Upcoming Tournament</h1>
+                <div>Name: {tournament.name}</div>
+                <div>Start Date: {new Date(tournament.startDate).toDateString()}</div>
+                <div>End Date: {new Date(tournament.endDate).toDateString()}</div>
+                <p>Description: {tournament.description}</p>
+                <div>Participants: {renderParticipants()}</div>
+                <button disabled={tournament.participants ? userAlreadyJoined() : null} onClick={joinTournamentHandler}>Join Tournament</button>
+            </>
+        )
+    }
+
     return(
         <>
-            <h1>Upcoming Tournament</h1>
-            <div>Name: {tournament.name}</div>
-            <button disabled={tournament.participants ? userAlreadyJoined() : null} onClick={joinTournamentHandler}>Join Tournament</button> 
+            {Object.keys(tournament).length === 0 ? <h1>Loading</h1> : renderComponent()}
         </>
     )
 }
