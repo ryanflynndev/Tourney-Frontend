@@ -113,14 +113,7 @@ export const addTournamentFetch = (newTournament) => dispatch => {
 
 export const addUserToTournamentFetch = (tournament, history) => async dispatch => {
   try {
-    const configObj = {
-      method: 'PUT',
-      headers: {
-        'Content-type': 'application/json',
-        'Accepts': 'application/json'
-      }
-    }
-    const resp = await fetch(`/tournament/${tournament._id}/join`, configObj)
+    const resp = await fetch(`/tournament/${tournament._id}/join`)
     const data = await resp.json();
     if (resp.status === 200){
       dispatch(updateUpcomingTournament(data));
@@ -132,7 +125,7 @@ export const addUserToTournamentFetch = (tournament, history) => async dispatch 
       const add = {_id: data.tournament._id};
       dispatch(addTournamentToJoined(add))
       dispatch(setInUse(data.tournament))
-      history.push(`/tournament/${data.tournament._id}`)
+      
     }
   } catch(error){
     console.log(error)
