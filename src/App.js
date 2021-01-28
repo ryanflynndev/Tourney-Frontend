@@ -26,16 +26,18 @@ function App(props) {
 
   return (
     <>
-        {currentUser._id ? null : <Landing />}
-        <NavBar />
-        <Switch>
-          <Route path="/home" component={Home} />
-          <Route path="/tournament-form" component={TournamentForm} />
-          <Route path="/tournaments" component={TournamentContainer}/>
-          <Route path="/upcoming-tournament/:id" component={UpcomingTournamentShow} />
-          <Route path="/current-tournament/:id" component={CurrentTournamentShow} />
-          <Route path="/past-tournament/:id" component={PastTournamentShow} />
-        </Switch>
+        {currentUser._id ? <>
+          <NavBar />
+          <Switch>
+            <Route path="/home" component={Home} />
+            <Route path="/tournament-form" component={TournamentForm} />
+            <Route path="/tournaments" component={TournamentContainer}/>
+            <Route path="/upcoming-tournament/:id" component={UpcomingTournamentShow} />
+            <Route path="/current-tournament/:id" component={CurrentTournamentShow} />
+            <Route path="/past-tournament/:id" component={PastTournamentShow} />
+          </Switch> 
+        </>
+ : <Landing />}
 
     </>
   );
